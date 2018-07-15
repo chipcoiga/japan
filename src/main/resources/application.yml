@@ -1,0 +1,28 @@
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: DEBUG
+#      hibernate:
+#        SQL: DEBUG
+#    com:
+#      bigpay:
+#        userservice: DEBUG
+
+server:
+  port: 8083
+
+jdbc:
+  jdbcUrl: jdbc:postgresql://localhost:5432/japanese_db
+  username: postgres
+  password: admin
+  driverClassName: org.postgresql.Driver
+  connectionTimeout: 30000
+  idleTimeout: 600000
+  maxPoolSize: -1
+
+
+spring:
+  jpa:
+    show-sql: true
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
