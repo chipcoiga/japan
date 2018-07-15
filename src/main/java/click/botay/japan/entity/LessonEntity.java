@@ -18,7 +18,7 @@ public class LessonEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "lessons_videos",
             joinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"),

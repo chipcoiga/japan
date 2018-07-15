@@ -2,6 +2,7 @@ package click.botay.japan.entity;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "videos")
@@ -18,12 +19,12 @@ public class VideoEntity {
     @Column(name = "url")
     private String url;
 
-    @ManyToOne
+    @ManyToMany
     @JoinTable(
             name = "lessons_videos",
             joinColumns = @JoinColumn(name = "video_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private LessonEntity lesson;
+    private Set<LessonEntity> lessons;
 
     public long getId() {
         return id;
@@ -49,11 +50,11 @@ public class VideoEntity {
         this.url = url;
     }
 
-    public LessonEntity getLesson() {
-        return lesson;
+    public Set<LessonEntity> getLessons() {
+        return lessons;
     }
 
-    public void setLesson(LessonEntity lesson) {
-        this.lesson = lesson;
+    public void setLessons(Set<LessonEntity> lessons) {
+        this.lessons = lessons;
     }
 }
