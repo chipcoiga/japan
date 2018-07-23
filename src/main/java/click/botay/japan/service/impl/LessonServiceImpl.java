@@ -27,7 +27,9 @@ public class LessonServiceImpl implements LessonService {
 
     public LessonServiceImpl(LessonRepository lessonRepository,
                              VideoRepository videoRepository,
-                             VocabularyRepository vocabularyRepository, GrammarRepository grammarRepository, LessonEntityToResponseConverter converter) {
+                             VocabularyRepository vocabularyRepository,
+                             GrammarRepository grammarRepository,
+                             LessonEntityToResponseConverter converter) {
         this.lessonRepository = lessonRepository;
         this.videoRepository = videoRepository;
         this.vocabularyRepository = vocabularyRepository;
