@@ -4,8 +4,10 @@ import click.botay.japan.converter.LessonEntityToResponseConverter;
 import click.botay.japan.domain.LessonResponse;
 import click.botay.japan.domain.LessonUpsertRequest;
 import click.botay.japan.entity.LessonEntity;
+import click.botay.japan.repository.GrammarRepository;
 import click.botay.japan.repository.LessonRepository;
 import click.botay.japan.repository.VideoRepository;
+import click.botay.japan.repository.VocabularyRepository;
 import click.botay.japan.service.LessonService;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +21,17 @@ public class LessonServiceImpl implements LessonService {
 
     private final LessonRepository lessonRepository;
     private final VideoRepository videoRepository;
+    private final VocabularyRepository vocabularyRepository;
+    private final GrammarRepository grammarRepository;
     private final LessonEntityToResponseConverter converter;
 
     public LessonServiceImpl(LessonRepository lessonRepository,
                              VideoRepository videoRepository,
-                             LessonEntityToResponseConverter converter) {
+                             VocabularyRepository vocabularyRepository, GrammarRepository grammarRepository, LessonEntityToResponseConverter converter) {
         this.lessonRepository = lessonRepository;
         this.videoRepository = videoRepository;
+        this.vocabularyRepository = vocabularyRepository;
+        this.grammarRepository = grammarRepository;
         this.converter = converter;
     }
 
@@ -33,6 +39,8 @@ public class LessonServiceImpl implements LessonService {
     public List<LessonResponse> getLessons() {
         return lessonRepository.findAll().stream().map(converter::convert).collect(Collectors.toList());
     }
+
+
 
     @Transactional
     @Override
@@ -45,6 +53,8 @@ public class LessonServiceImpl implements LessonService {
         entity.setTitle(request.getTitle());
         entity.setDescription(request.getDescription());
         entity.setVideos(new HashSet<>(videoRepository.findAllByIdIn(request.getVideoIds())));
+        entity.setGrammarEntities(new HashSet<>(grammarRepository.findAllByIdIn(request.getGrammarIds())));
+        entity.setVocabularyEntities(new HashSet<>(vocabularyRepository.findAllByIdIn(request.getVocabularyIds())));
         return entity;
     }
 }
