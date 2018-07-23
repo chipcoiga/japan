@@ -10,10 +10,10 @@ server:
   port: 8083
 
 jdbc:
-  jdbcUrl: jdbc:postgresql://localhost:5432/japanese_db
-  username: postgres
-  password: admin
-  driverClassName: org.postgresql.Driver
+  jdbcUrl: jdbc:mysql://localhost:3306/hoccaieo?useSSL=false
+  username: root
+  password: 980137
+  driverClassName: com.mysql.jdbc.Driver
   connectionTimeout: 30000
   idleTimeout: 600000
   maxPoolSize: -1

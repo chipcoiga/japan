@@ -25,6 +25,37 @@ public class LessonEntity {
             inverseJoinColumns = @JoinColumn(name = "video_id", referencedColumnName = "id"))
     private Set<VideoEntity> videos;
 
+    @ManyToMany
+    @JoinTable(
+            name = "lessons_grammar",
+            joinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "grammar_id", referencedColumnName = "id"))
+    private Set<GrammarEntity> grammarEntities;
+
+    @ManyToMany
+    @JoinTable(
+            name = "lessons_vocabulary",
+            joinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "vocabulary_id", referencedColumnName = "id"))
+    private Set<VocabularyEntity> vocabularyEntities;
+
+    public Set<GrammarEntity> getGrammarEntities() {
+        return grammarEntities;
+    }
+
+    public void setGrammarEntities(Set<GrammarEntity> grammarEntities) {
+        this.grammarEntities = grammarEntities;
+    }
+
+    public Set<VocabularyEntity> getVocabularyEntities() {
+        return vocabularyEntities;
+    }
+
+    public void setVocabularyEntities(Set<VocabularyEntity> vocabularyEntities) {
+        this.vocabularyEntities = vocabularyEntities;
+    }
+
+
     public long getId() {
         return id;
     }
