@@ -37,6 +37,7 @@ public class LessonEntity {
             name = "lessons_vocabulary",
             joinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "vocabulary_id", referencedColumnName = "id"))
+
     private Set<VocabularyEntity> vocabularyEntities;
 
     public Set<GrammarEntity> getGrammarEntities() {
