@@ -38,7 +38,6 @@ public class LoginSevceImpl implements LoginSevice {
     @Override
     public void checkOut(String session) {
         LoginEntity loginEntity = loginRepository.findAllBySession(session);
-
         loginEntity.setSession(null);
     }
 
