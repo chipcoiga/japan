@@ -30,5 +30,13 @@ public class LoginController {
         loginSevice.checkOut(session);
         return "failed";
     }
+    @PutMapping
+    public String checkSession(@RequestBody String session){
+        boolean index = loginSevice.checkSession(session);
+        if (index){
+            return "true";
+        }
+        return "fasle";
+    }
 
 }

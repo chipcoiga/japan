@@ -6,6 +6,8 @@ import click.botay.japan.repository.LoginRepository;
 import click.botay.japan.service.LoginSevice;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,7 +31,11 @@ public class LoginSevceImpl implements LoginSevice {
                 loginUpsertRequest.getPassword());
         if (loginEntity!=null){
             String sesion = UUID.randomUUID().toString();
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MINUTE, 30);
             loginEntity.setSession(sesion);
+            Timestamp timestamp = new Timestamp(calendar.getTime().getTime());
+            loginEntity.setTimeStamp(timestamp);
             return new Object[] {true, loginEntity.getSession()};
         }
         return new Object[]{false, null};
@@ -39,6 +45,19 @@ public class LoginSevceImpl implements LoginSevice {
     public void checkOut(String session) {
         LoginEntity loginEntity = loginRepository.findAllBySession(session);
         loginEntity.setSession(null);
+    }
+    @Transactional
+    @Override
+    public boolean checkSession(String session) {
+        LoginEntity loginEntity = loginRepository.findAllBySession(session);
+        if (loginEntity!=null){
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MINUTE, 30);
+            Timestamp timestamp = new Timestamp(calendar.getTime().getTime());
+            loginEntity.setTimeStamp(timestamp);
+            return true;
+        }
+        return false;
     }
 
 

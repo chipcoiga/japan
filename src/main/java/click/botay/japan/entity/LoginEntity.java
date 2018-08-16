@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.management.relation.Role;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
@@ -21,7 +22,21 @@ public class LoginEntity implements Serializable {
     @JoinColumn(name = "roleid")
     @JsonIgnore
     private RoleEntity roleEntity;
+
+    @Column(name = "session")
     private String session;
+    @Column(name = "timelog")
+    private Timestamp timeStamp;
+
+    public Timestamp getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Timestamp timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+
 
     public String getSession() {
         return session;

@@ -9,6 +9,7 @@ public interface LoginSevice {
     List<LoginEntity> findAll();
     Object[] checkLogin(LoginUpsertRequest loginUpsertRequest);
     void checkOut(String session);
+    boolean checkSession(String sesion);
 
  //   String upDateSession(LoginEntity loginEntity);
 }
